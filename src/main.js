@@ -14,6 +14,7 @@ import ListarInver from './components/ListarInver';
 import CrearInver from './components/CrearInver';
 import EditarInver from './components/EditarInver';
 import Contacto from './components/Contacto';
+import VistaAreas from './views/VistaAreas';
 
 
 //creamos nuestros componentes
@@ -25,6 +26,7 @@ Vue.component('ListarInver', ListarInver);
 Vue.component('CrearInver', CrearInver);
 Vue.component('EditarInver', EditarInver);
 Vue.component('Contacto', Contacto);
+Vue.component('VistaAreas', VistaAreas);
 
 
 //uso de vue-router
@@ -41,7 +43,8 @@ const routes = [
   {path:'/crearin', component:CrearInver, name:'CrearInver'},
   {path:'/editarin', component:EditarInver, name:'EditarInver'},
   {path:'/contacto',component:Contacto},
-  {path:'/redes',component:Contacto}
+  {path:'/redes',component:Contacto},
+  {path:'/lugar-cultivo/:idArea', component:VistaAreas, props:true}
 ]
 
 //crearmos el objeto router
