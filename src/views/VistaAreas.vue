@@ -3,7 +3,7 @@
     <v-row class="mb-6">
       <v-col md="4">
         <v-toolbar-title class="text-left font-weight-black text-h4"
-          >{{ invernadero.name }}|{{ idArea }}
+          >{{ invernadero.name }}|{{idArea}}
         </v-toolbar-title>
       </v-col>
       <v-col md="4" offset-md="4">
