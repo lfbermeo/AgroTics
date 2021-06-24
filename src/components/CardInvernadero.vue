@@ -18,12 +18,23 @@
       >
     </v-list-item>
 
-    <v-progress-linear v-model="areaOcupada" height="25" :color="colorPorcentaje(areaOcupada)">
+    <v-progress-linear
+      v-model="areaOcupadaNew"
+      height="25"
+      :color="colorPorcentaje(areaOcupada)"
+    >
       <strong>{{ Math.ceil(areaOcupada) }}%</strong>
     </v-progress-linear>
 
     <v-card-actions>
-      <v-btn outlined rounded text :to="{path:`/lugar-cultivo/${idInvernadero}`}"> Ver más </v-btn>
+      <v-btn
+        outlined
+        rounded
+        text
+        :to="{ path: `/lugar-cultivo/${idInvernadero}` }"
+      >
+        Ver más
+      </v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -34,10 +45,15 @@ export default {
     idInvernadero: Number,
     nomInvernadero: String,
     areaInvernadero: Number,
-    areaOcupada: Number,
+    areaOcupada: Number
+  },
+  data() {
+    return {
+      areaOcupadaNew: this.areaOcupada
+    };
   },
   methods: {
-    colorPorcentaje: function (porcentaje) {
+    colorPorcentaje: function(porcentaje) {
       let color = "green darkend-1";
       if (porcentaje >= 80) {
         color = "red darkend-1";
@@ -45,7 +61,7 @@ export default {
         color = "amber darkend-1";
       }
       return color;
-    },
-  },
+    }
+  }
 };
 </script>

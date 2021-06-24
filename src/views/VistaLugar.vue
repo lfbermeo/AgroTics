@@ -144,21 +144,21 @@ export default {
           id: 1,
           plantingName: "Invernadero 1",
           plantingArea: "Vacío",
-          plantingType: "Localización",
-        },
+          plantingType: "Localización"
+        }
       ],
       plantingData: {
         plantingName: "",
         plantingArea: "",
         plantingType: "",
-        id: 0,
+        id: 0
       },
       snackbar: false,
-      textsnack: "",
+      textsnack: ""
     };
   },
   methods: {
-    guardarPlanting: function () {
+    guardarPlanting: function() {
       this.dialog = false;
       this.plantingData.id = this.plantings[this.plantings.length - 1].id + 1;
       this.plantings.push(Object.assign({}, this.plantingData));
@@ -167,32 +167,30 @@ export default {
       this.plantingData.plantingType = "";
       this.plantingData.id = 0;
     },
-    editarRegistro: function (id) {
-      const planting = this.plantings.filter(
-        (planting) => planting.id == id
-      )[0];
+    editarRegistro: function(id) {
+      const planting = this.plantings.filter(planting => planting.id == id)[0];
       this.plantingData.id = planting.id;
       this.plantingData.plantingName = planting.plantingName;
       this.plantingData.plantingArea = planting.plantingArea;
       this.plantingData.plantingType = planting.plantingType;
       this.abrirModal("Editar");
     },
-    abrirModal: function (accion) {
+    abrirModal: function(accion) {
       this.accionModal = accion;
       this.dialog = true;
     },
-    cerrarModal: function () {
+    cerrarModal: function() {
       this.dialog = false;
       this.plantingData.id = 0;
       this.plantingData.plantingName = "";
       this.plantingData.plantingArea = "";
       this.plantingData.plantingType = "";
     },
-    confirmarBorrado: function (id) {
-      const plantings = this.plantings.filter((planting) => planting.id !== id);
+    confirmarBorrado: function(id) {
+      const plantings = this.plantings.filter(planting => planting.id !== id);
       this.plantings = plantings;
       this.dialogEliminar = false;
-    },
-  },
+    }
+  }
 };
 </script>

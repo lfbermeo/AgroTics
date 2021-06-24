@@ -122,47 +122,45 @@ export default {
       locations: [
         {
           id: 1,
-          locationName: "utpl",
-        },
+          locationName: "utpl"
+        }
       ],
       locationData: {
         locationName: "",
-        id: 0,
+        id: 0
       },
       snackbar: false,
-      textsnack: "",
+      textsnack: ""
     };
   },
   methods: {
-    guardarLocalizacion: function () {
+    guardarLocalizacion: function() {
       this.dialog = false;
       this.locationData.id = this.locations[this.locations.length - 1].id + 1;
       this.locations.push(Object.assign({}, this.locationData));
       this.locationData.locationName = "";
       this.locationData.id = 0;
     },
-    editarRegistro: function (id) {
-      const location = this.locations.filter(
-        (location) => location.id == id
-      )[0];
+    editarRegistro: function(id) {
+      const location = this.locations.filter(location => location.id == id)[0];
       this.locationData.id = location.id;
       this.locationData.locationName = location.locationName;
       this.abrirModal("Editar");
     },
-    abrirModal: function (accion) {
+    abrirModal: function(accion) {
       this.accionModal = accion;
       this.dialog = true;
     },
-    cerrarModal: function () {
+    cerrarModal: function() {
       this.dialog = false;
       this.locationData.id = 0;
       this.locationData.locationName = "";
     },
-    confirmarBorrado: function (id) {
-      const location = this.locations.filter((location) => location.id !== id);
+    confirmarBorrado: function(id) {
+      const location = this.locations.filter(location => location.id !== id);
       this.locations = location;
       this.dialogEliminar = false;
-    },
-  },
+    }
+  }
 };
 </script>
