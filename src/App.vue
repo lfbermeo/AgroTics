@@ -17,28 +17,70 @@
             <v-list-item-title>Inicio</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item :to="{ path: '/cultivos' }">
+        <v-divider></v-divider>
+        <v-list-item>
+          <v-list-item-content>
+            <v-list-item-title class="text-h6"> Índices </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item :to="{ path: '/localizaciones' }">
           <v-list-item-action>
             <v-icon></v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>Cultivos</v-list-item-title>
+            <v-list-item-title>Localizaciones</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item :to="{ path: '/inver' }">
+          <v-list-item :to="{ path: '/tipoParcela' }">
           <v-list-item-action>
             <v-icon></v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>Invernaderos/Parcelas</v-list-item-title>
+            <v-list-item-title>Tipo parcela</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item :to="{ path: '/contacto' }">
+          <v-list-item :to="{ path: '/lugarPlantacion' }">
           <v-list-item-action>
-            <v-icon>mdi-{{ icons[2] }}</v-icon>
+            <v-icon></v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>Contacto</v-list-item-title>
+            <v-list-item-title>Lugares plantación</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+          <v-list-item :to="{ path: '/cultivo' }">
+          <v-list-item-action>
+            <v-icon></v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Cultivo</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-divider></v-divider>
+        <v-list-item>
+          <v-list-item-content>
+            <v-list-item-title class="text-h6"> Cultivos </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item :to="{ path: '/vistaAreas' }">
+          <v-list-item-action>
+            <v-icon></v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Áreas cultivos</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-divider></v-divider>
+        <v-list-item>
+          <v-list-item-content>
+            <v-list-item-title class="text-h6"> Muestreos </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item :to="{ path: '/muestreos' }">
+          <v-list-item-action>
+            <v-icon></v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Muestreos</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
