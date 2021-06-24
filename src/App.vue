@@ -48,6 +48,10 @@
           </v-list-item-content>
         </v-list-item>
           <v-list-item :to="{ path: '/cultivo' }">
+            <v-list-item-title>Nuevo Muestreo</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item :to="{ path: '/cultivos' }">
           <v-list-item-action>
             <v-icon></v-icon>
           </v-list-item-action>
