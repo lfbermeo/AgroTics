@@ -17,6 +17,14 @@
             <v-list-item-title>Inicio</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+        <v-list-item :to="{ path: '/muestreo' }">
+          <v-list-item-action>
+            <v-icon></v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Nuevo Muestreo</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
         <v-list-item :to="{ path: '/cultivos' }">
           <v-list-item-action>
             <v-icon></v-icon>
