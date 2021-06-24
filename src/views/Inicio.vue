@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import CardInvernadero from "./CardInvernadero.vue";
+import CardInvernadero from "../components/CardInvernadero.vue";
 export default {
   components: { CardInvernadero },
   name: "inicio",
@@ -58,28 +58,28 @@ export default {
           id: 1,
           name: "Invernadero 1",
           area: 800,
-          porcentaje: 20,
+          porcentaje: 20
         },
         {
           id: 2,
           name: "Invernadero 2",
           area: 500,
-          porcentaje: 80,
+          porcentaje: 80
         },
         {
           id: 3,
           name: "Invernadero 3",
           area: 700,
-          porcentaje: 50,
+          porcentaje: 50
         },
         {
           id: 4,
           name: "Parcela 1",
           area: 200,
-          porcentaje: 30,
-        },
-      ],
+          porcentaje: 30
+        }
+      ]
     };
-  },
+  }
 };
 </script>
