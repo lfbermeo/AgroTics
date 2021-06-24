@@ -15,6 +15,13 @@ import CrearInver from './components/CrearInver';
 import EditarInver from './components/EditarInver';
 import Contacto from './components/Contacto';
 import VistaAreas from './views/VistaAreas';
+
+import VistaLocalizaciones from './views/VistaLocalizaciones';
+import VistaParcela from './views/VistaParcela';
+import VistaLugar from './views/VistaLugar';
+import VistaCultivo from './views/VistaCultivo';
+import VistaAreaCultivo from './views/VistaAreaCultivo';
+
 import Nuevo_Muestreo from './components/Nuevo_Muestreo';
 
 
@@ -28,6 +35,13 @@ Vue.component('CrearInver', CrearInver);
 Vue.component('EditarInver', EditarInver);
 Vue.component('Contacto', Contacto);
 Vue.component('VistaAreas', VistaAreas);
+
+Vue.component('VistaLocalizaciones', VistaLocalizaciones);
+Vue.component('VistaParcela', VistaParcela);
+Vue.component('VistaLugar', VistaLugar);
+Vue.component('VistaCultivo', VistaCultivo);
+Vue.component('VistaAreaCultivo', VistaAreaCultivo);
+
 Vue.component('Nuevo_Muestreo', Nuevo_Muestreo);
 
 
@@ -47,6 +61,13 @@ const routes = [
   {path:'/contacto',component:Contacto},
   {path:'/redes',component:Contacto},
   {path:'/lugar-cultivo/:idArea', component:VistaAreas, props:true},
+
+  {path:'/localizaciones', component:VistaLocalizaciones},
+  {path:'/tipoParcela', component:VistaParcela},
+  {path:'/lugarPlantacion', component:VistaLugar},
+  {path:'/cultivo', component:VistaCultivo},
+  {path:'/vistaAreas', component:VistaAreaCultivo}
+
   {path:'/muestreo', component:Nuevo_Muestreo}
 ]
 
