@@ -1,90 +1,104 @@
 <template>
-<v-container>
-     <v-row class="text-center">    
+  <v-container>
+    <v-row class="text-center">
       <v-col class="mb-4">
-        <h1 class="display-2 font-weight-bold mb-3">Formulario de EDICIÓN de Invernadero/Parcela</h1>       
-      </v-col>     
+        <h1 class="display-2 font-weight-bold mb-3">
+          Formulario de EDICIÓN de Invernadero/Parcela
+        </h1>
+      </v-col>
     </v-row>
     <v-row>
-    <v-col>
+      <v-col>
         <v-row justify="center">
-             <v-col cols="12" sm="10" md="8" lg="6">
-                    <form v-on:submit.prevent="guardarArticulo()">
-                        <v-text-field v-model="articulo.descripcion"
-                                label="Ubicación"
-                                outlined
-                                required   
-                        ></v-text-field>
-                        <v-text-field
-                                v-model="articulo.precio"        
-                                label="Fecha de muestreo"
-                                outlined
-                                required        
-                        ></v-text-field>
-                        <v-subheader>Datos Ubicación</v-subheader>
-                        <v-text-field
-                                v-model="articulo.precio"        
-                                label="Lugar/Lote"
-                                outlined
-                                required        
-                        ></v-text-field>
-                        <v-text-field
-                                v-model="articulo.precio"        
-                                label="Área sembrada"
-                                type="number"
-                                outlined
-                                required        
-                        ></v-text-field>
+          <v-col cols="12" sm="10" md="8" lg="6">
+            <form v-on:submit.prevent="guardarArticulo()">
+              <v-text-field
+                v-model="articulo.descripcion"
+                label="Ubicación"
+                outlined
+                required
+              ></v-text-field>
+              <v-text-field
+                v-model="articulo.precio"
+                label="Fecha de muestreo"
+                outlined
+                required
+              ></v-text-field>
+              <v-subheader>Datos Ubicación</v-subheader>
+              <v-text-field
+                v-model="articulo.precio"
+                label="Lugar/Lote"
+                outlined
+                required
+              ></v-text-field>
+              <v-text-field
+                v-model="articulo.precio"
+                label="Área sembrada"
+                type="number"
+                outlined
+                required
+              ></v-text-field>
 
-                            <v-card-actions>
-                                <v-btn color="warning" class="mr-4" type="submit">Guardar</v-btn>      
-                            </v-card-actions>
-                    </form>
-             </v-col>
-        </v-row>    
-    </v-col>
+              <v-card-actions>
+                <v-btn color="warning" class="mr-4" type="submit"
+                  >Guardar</v-btn
+                >
+              </v-card-actions>
+            </form>
+          </v-col>
+        </v-row>
+      </v-col>
     </v-row>
-
-    </v-container>
-
+  </v-container>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
-    name:'EditarInver',
-    mounted(){
-      this.id = this.$route.params.id;
-      console.log(this.$route);
-      axios.get('http://127.0.0.1/apirest/articulos.php?id='+this.id)
-      .then(r =>{
+  name: "EditarInver",
+  mounted() {
+    this.id = this.$route.params.id;
+    console.log(this.$route);
+    axios
+      .get("http://127.0.0.1/apirest/articulos.php?id=" + this.id)
+      .then(r => {
         this.articulo = r.data;
       })
-      .catch(function(error){
+      .catch(function(error) {
         console.log(error);
       });
-    },
-    data(){
-      return{
-        id:null,
-        articulo:{
-          descripcion:'',
-          precio:'',
-          stock:''
-        }
+  },
+  data() {
+    return {
+      id: null,
+      articulo: {
+        descripcion: "",
+        precio: "",
+        stock: ""
       }
-    },
-    methods:{
-      guardarArticulo(){
-         var router =  this.$router;
-        axios.put('http://127.0.0.1/apirest/articulos.php?id='+this.id+'&descripcion='+this.articulo.descripcion+'&precio='+this.articulo.precio+'&stock='+this.articulo.stock)
-        .then(function(){
-           router.push('/inver'); 
+    };
+  },
+  methods: {
+    guardarArticulo() {
+      var router = this.$router;
+      axios
+        .put(
+          "http://127.0.0.1/apirest/articulos.php?id=" +
+            this.id +
+            "&descripcion=" +
+            this.articulo.descripcion +
+            "&precio=" +
+            this.articulo.precio +
+            "&stock=" +
+            this.articulo.stock
+        )
+        .then(function() {
+          router.push("/inver");
         })
-        .catch(function(error){
-        console.log(error);
+        .catch(function(error) {
+          console.log(error);
         });
-      }
     }
-}
+  }
+};
 </script>

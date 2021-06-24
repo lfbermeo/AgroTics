@@ -142,21 +142,21 @@ export default {
           id: 1,
           cropName: "lechuga",
           cropScientificName: "Lactuca sativa",
-          cropVariety: "romana",
-        },
+          cropVariety: "romana"
+        }
       ],
       cropData: {
         cropName: "",
         cropScientificName: "",
         cropVariety: "",
-        id: 0,
+        id: 0
       },
       snackbar: false,
-      textsnack: "",
+      textsnack: ""
     };
   },
   methods: {
-    guardarCrop: function () {
+    guardarCrop: function() {
       this.dialog = false;
       this.cropData.id = this.crops[this.crops.length - 1].id + 1;
       this.crops.push(Object.assign({}, this.cropData));
@@ -165,30 +165,30 @@ export default {
       this.cropData.cropVariety = "";
       this.cropData.id = 0;
     },
-    editarRegistro: function (id) {
-      const crop = this.crops.filter((crop) => crop.id == id)[0];
+    editarRegistro: function(id) {
+      const crop = this.crops.filter(crop => crop.id == id)[0];
       this.cropData.id = crop.id;
       this.cropData.cropName = crop.cropName;
       this.cropData.cropScientificName = crop.cropScientificName;
       this.cropData.cropVariety = crop.cropVariety;
       this.abrirModal("Editar");
     },
-    abrirModal: function (accion) {
+    abrirModal: function(accion) {
       this.accionModal = accion;
       this.dialog = true;
     },
-    cerrarModal: function () {
+    cerrarModal: function() {
       this.dialog = false;
       this.cropData.id = 0;
       this.cropData.cropName = "";
       this.cropData.cropScientificName = "";
       this.cropData.cropVariety = "";
     },
-    confirmarBorrado: function (id) {
-      const crops = this.crops.filter((crop) => crop.id !== id);
+    confirmarBorrado: function(id) {
+      const crops = this.crops.filter(crop => crop.id !== id);
       this.crops = crops;
       this.dialogEliminar = false;
-    },
-  },
+    }
+  }
 };
 </script>

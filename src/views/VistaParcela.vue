@@ -122,47 +122,45 @@ export default {
       places: [
         {
           id: 1,
-          placeName: "Invernadero 1",
-        },
+          placeName: "Invernadero 1"
+        }
       ],
       placeData: {
         placeName: "",
-        id: 0,
+        id: 0
       },
       snackbar: false,
-      textsnack: "",
+      textsnack: ""
     };
   },
   methods: {
-    guardarPlace: function () {
+    guardarPlace: function() {
       this.dialog = false;
       this.placeData.id = this.places[this.places.length - 1].id + 1;
       this.places.push(Object.assign({}, this.placeData));
       this.placeData.placeName = "";
       this.placeData.id = 0;
     },
-    editarRegistro: function (id) {
-      const place = this.places.filter(
-        (place) => place.id == id
-      )[0];
+    editarRegistro: function(id) {
+      const place = this.places.filter(place => place.id == id)[0];
       this.placeData.id = place.id;
       this.placeData.placeName = place.placeName;
       this.abrirModal("Editar");
     },
-    abrirModal: function (accion) {
+    abrirModal: function(accion) {
       this.accionModal = accion;
       this.dialog = true;
     },
-    cerrarModal: function () {
+    cerrarModal: function() {
       this.dialog = false;
       this.plantingData.id = 0;
       this.plantingData.placeName = "";
     },
-    confirmarBorrado: function (id) {
-      const places = this.places.filter((place) => place.id !== id);
+    confirmarBorrado: function(id) {
+      const places = this.places.filter(place => place.id !== id);
       this.places = places;
       this.dialogEliminar = false;
-    },
-  },
+    }
+  }
 };
 </script>

@@ -27,6 +27,6 @@
 <script>
 export default {
   name: "CardArea",
-  props: { nameCultivo: String, areaCultivo: Number, totalCultivo: Number },
+  props: { nameCultivo: String, areaCultivo: Number, totalCultivo: Number }
 };
 </script>

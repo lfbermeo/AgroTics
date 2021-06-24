@@ -7,5 +7,5 @@ export default {
   error: colors.orange.base,
   warning: colors.amber.base,
   info: colors.lightBlue.base,
-  success: colors.green.base,
+  success: colors.green.base
 };
