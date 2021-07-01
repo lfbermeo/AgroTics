@@ -79,7 +79,7 @@
     <!-- END App Bar -->
 
     <v-main>
-      <v-container fluid>
+      <v-container fluid class="bamboo-color cover-size">
         <v-fade-transition mode="out-in">
           <router-view />
         </v-fade-transition>
@@ -150,3 +150,16 @@ export default {
   }),
 };
 </script>
+
+<style scoped>
+.bamboo-color {
+  /* background-color: #d1e8b2; */
+  background-image: url("assets/waves.svg");
+  background-position: bottom;
+  /* background-clip: border-box; */
+  background-attachment: fixed;
+}
+.cover-size {
+  min-height: 100vh;
+}
+</style>
