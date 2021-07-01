@@ -95,15 +95,15 @@ export default {
         icon: "mdi-book-alphabet",
         subroutes: [
           {
-            title: "Localizaciones",
+            title: "Ubicaciones",
             path: "/locations"
           },
           {
-            title: "Tipo parcela",
-            path: "/placeType"
+            title: "Tipo de parcela",
+            path: "/placeTypes"
           },
           {
-            title: "Lugares plantación",
+            title: "Lugares de plantación",
             path: "/plantationPlaces"
           },
           {

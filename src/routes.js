@@ -12,10 +12,10 @@ import VueRouter from "vue-router";
 
 import Inicio from "./views/Inicio";
 
-import VistaLocalizaciones from "./views/VistaLocalizaciones";
-import VistaParcela from "./views/VistaParcela";
-import VistaLugar from "./views/VistaLugar";
-import VistaCultivo from "./views/VistaCultivo";
+import ViewLocations from "./views/ViewLocations";
+import ViewPlaceTypes from "./views/ViewPlaceTypes";
+import ViewPlantationPlaces from "./views/ViewPlantationPlaces";
+import ViewCrops from "./views/ViewCrops";
 import VistaAreaCultivo from "./views/VistaAreaCultivo";
 
 import Nuevo_Muestreo from "./views/Nuevo_Muestreo";
@@ -23,14 +23,14 @@ import Nuevo_Muestreo from "./views/Nuevo_Muestreo";
 const routes = [
   { path: "/", name: "home", component: Inicio },
 
-  { path: "/locations", name: "locations", component: VistaLocalizaciones },
-  { path: "/placeTypes", name: "placeTypes", component: VistaParcela },
+  { path: "/locations", name: "locations", component: ViewLocations },
+  { path: "/placeTypes", name: "placeTypes", component: ViewPlaceTypes },
   {
     path: "/plantationPlaces",
     name: "plantationPlaces",
-    component: VistaLugar
+    component: ViewPlantationPlaces
   },
-  { path: "/crops", name: "crops", component: VistaCultivo },
+  { path: "/crops", name: "crops", component: ViewCrops },
 
   { path: "/plantedAreas", name: "plantedAreas", component: VistaAreaCultivo },
   { path: "/samplings", name: "samplings", component: Nuevo_Muestreo }

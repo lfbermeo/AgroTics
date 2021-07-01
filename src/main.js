@@ -12,6 +12,8 @@ Vue.use(VueRouter);
 
 Vue.config.productionTip = false;
 
+Vue.prototype.$API_URI = "https://agrotics-api.herokuapp.com/api/v1.0/";
+
 new Vue({
   vuetify,
   router,
