@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <!-- START Navigation Drawer -->
-    <v-navigation-drawer class="deep-purple accent-4" v-model="drawer" dark app>
+    <v-navigation-drawer v-model="drawer" dark app>
       <!-- START Navigation Drawer Title -->
       <v-list-item>
         <v-list-item-content>
