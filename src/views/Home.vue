@@ -1,32 +1,27 @@
 <template>
   <div>
-    <v-parallax dark :src="require('../assets/fondo.jpg')" height="250px">
-      <v-container>
-        <v-row class="text-center">
-          <v-col cols="12">
-            <v-img
-              :src="require('../assets/logo-utpl.png')"
-              class="my-3"
-              contain
-              height="150"
-            />
-          </v-col>
-          <v-col class="mb-4">
-            <v-toolbar-title
-              class="black--text text-black font-weight-black text-h2"
-            >
-              AGROTICS
-            </v-toolbar-title>
-            <v-card-subtitle
-              class="black--text text-black font-weight-medium text-h5"
-            >
-              Agro tics es un proyecto orientado al control y registro de las
-              especies existentes en los invernaderos de UTPL
-            </v-card-subtitle>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-parallax>
+    <!-- <v-parallax dark :src="require('../assets/fondo.jpg')" height="250px"> -->
+    <v-container>
+      <v-row class="text-center">
+        <v-col cols="12">
+          <v-img
+            :src="require('../assets/logotipo-1024.png')"
+            class="my-4"
+            contain
+            max-height="150"
+          />
+        </v-col>
+        <v-col class="mb-4 px-6">
+          <v-card-subtitle
+            class="black--text text-black font-weight-medium text-h4"
+          >
+            Agro tics es un proyecto orientado al control y registro de las
+            especies existentes en los invernaderos de UTPL
+          </v-card-subtitle>
+        </v-col>
+      </v-row>
+    </v-container>
+    <!-- </v-parallax> -->
     <v-row class="mt-2">
       <v-col
         v-for="(inv, index) in invernaderos"
