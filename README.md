@@ -1,4 +1,4 @@
-# app
+# agrotics-app
 
 ## Project setup
 

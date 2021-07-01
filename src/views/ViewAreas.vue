@@ -41,45 +41,45 @@ export default {
   components: { CardArea },
   name: "vistaAreas",
   props: {
-    idArea: String
+    idArea: String,
   },
   computed: {
-    numEspecies: function() {
+    numEspecies: function () {
       let num = 0;
-      this.cultivos.forEach(cultivo => {
+      this.cultivos.forEach((cultivo) => {
         num += cultivo.totalCultivo;
       });
       return num;
-    }
+    },
   },
   data() {
     return {
       invernadero: {
         name: "Invernadero 1",
         area: 1200,
-        porcentaje: 20
+        porcentaje: 20,
       },
       cultivos: [
         {
           nameCultivo: "Lechuga",
           areaCultivo: 800,
-          totalCultivo: 20
+          totalCultivo: 20,
         },
         {
           nameCultivo: "Col",
           areaCultivo: 500,
-          totalCultivo: 80
+          totalCultivo: 80,
         },
         {
           nameCultivo: "Coliflor",
           areaCultivo: 700,
-          totalCultivo: 50
-        }
-      ]
+          totalCultivo: 50,
+        },
+      ],
     };
   },
   methods: {
-    colorPorcentaje: function(porcentaje) {
+    colorPorcentaje: function (porcentaje) {
       let color = "green darkend-1";
       if (porcentaje >= 80) {
         color = "red darkend-1";
@@ -87,7 +87,7 @@ export default {
         color = "amber darkend-1";
       }
       return color;
-    }
-  }
+    },
+  },
 };
 </script>

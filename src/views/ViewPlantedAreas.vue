@@ -1,5 +1,10 @@
 <template>
   <v-container>
+    <card-area
+      nameCultivo="Lechuga Sativa"
+      areaCultivo="50"
+      totalCultivo="2"
+    ></card-area>
     <v-row class="text-center">
       <v-col class="mb-4">
         <h2 class="display-2 font-weight-bold mb-3">Área cultivo</h2>
@@ -130,8 +135,11 @@
   </v-container>
 </template>
 <script>
+import CardArea from "../components/CardArea.vue";
+
 export default {
   name: "vistaAreaCultivo",
+  components: { CardArea },
   data() {
     return {
       dialog: false,
@@ -143,21 +151,21 @@ export default {
           id: 1,
           cropAreaPlace: "Parcela 1",
           cropAreaPlanting: 200,
-          cropAreaNum: 20
-        }
+          cropAreaNum: 20,
+        },
       ],
       cropAreaData: {
         cropAreaPlace: "",
         cropAreaPlanting: 0,
         cropAreaNum: 0,
-        id: 0
+        id: 0,
       },
       snackbar: false,
-      textsnack: ""
+      textsnack: "",
     };
   },
   methods: {
-    guardarCropArea: function() {
+    guardarCropArea: function () {
       this.dialog = false;
       this.cropAreaData.id = this.cropsArea[this.cropsArea.length - 1].id + 1;
       this.cropsArea.push(Object.assign({}, this.cropAreaData));
@@ -166,30 +174,32 @@ export default {
       this.cropAreaNum = 0;
       this.cropAreaData.id = 0;
     },
-    editarRegistro: function(id) {
-      const cropArea = this.cropsArea.filter(cropArea => cropArea.id == id)[0];
+    editarRegistro: function (id) {
+      const cropArea = this.cropsArea.filter(
+        (cropArea) => cropArea.id == id
+      )[0];
       this.cropAreaData.id = cropArea.id;
       this.cropAreaData.cropAreaPlace = cropArea.cropAreaPlace;
       this.cropAreaData.cropAreaPlanting = cropArea.cropAreaPlanting;
       this.cropAreaData.cropAreaNum = cropArea.cropAreaNum;
       this.abrirModal("Editar");
     },
-    abrirModal: function(accion) {
+    abrirModal: function (accion) {
       this.accionModal = accion;
       this.dialog = true;
     },
-    cerrarModal: function() {
+    cerrarModal: function () {
       this.dialog = false;
       this.cropAreaData.id = 0;
       this.cropAreaData.cropAreaPlace = "";
       this.cropAreaData.cropAreaPlanting = 0;
       this.cropAreaData.cropAreaNum = 0;
     },
-    confirmarBorrado: function(id) {
-      const cropAreas = this.cropsArea.filter(cropArea => cropArea.id !== id);
+    confirmarBorrado: function (id) {
+      const cropAreas = this.cropsArea.filter((cropArea) => cropArea.id !== id);
       this.cropsArea = cropAreas;
       this.dialogEliminar = false;
-    }
-  }
+    },
+  },
 };
 </script>

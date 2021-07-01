@@ -5,210 +5,250 @@
         <h2 class="display-2 font-weight-bold mb-3">Ubicaciones</h2>
       </v-col>
     </v-row>
-    <v-row>
-      <v-col class="mb-1">
-        <v-btn class="mx-2" fab dark color="indigo" @click="showModal('Nuevo')">
-          <v-icon dark>mdi-plus</v-icon>
-        </v-btn>
-        <v-dialog v-model="dialog" persistent max-width="600px">
-          <v-card>
-            <v-card-title>
-              <span class="text-h5">{{ accionModal }} Ubicación</span>
-            </v-card-title>
-            <v-card-text>
-              <v-container>
-                <v-row>
-                  <v-col cols="12">
-                    <v-text-field
-                      label="Nombre localización"
-                      required
-                      v-model="locationData.locationName"
-                    ></v-text-field>
-                  </v-col>
-                </v-row>
-              </v-container>
-              <small>*Indica campos requeridos</small>
-            </v-card-text>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="dismissModal">
-                Cerrar
-              </v-btn>
-              <v-btn color="blue darken-1" text @click="editOrCreateLocation">
-                Guardar
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
-      </v-col>
-    </v-row>
+
     <v-row class="text-center">
       <v-col cols="12">
-        <v-simple-table fixed-header class="elevation-3">
-          <template v-slot:default>
-            <thead>
-              <tr>
-                <th class="text-center">N°</th>
-                <th class="text-center">Ubicación</th>
-                <th class="text-center">Ult. Actualización</th>
-                <th class="text-center">Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="location in locations" :key="location.locationId">
-                <td>{{ location.locationId }}</td>
-                <td>{{ location.locationName.toUpperCase() }}</td>
-                <td>{{ convertTime(location.updatedAt) }}</td>
-                <td>
+        <!-- START Data Table -->
+        <v-data-table
+          :headers="headers"
+          :items="locations"
+          :items-per-page="5"
+          :loading="locations.length === 0"
+          loading-text="Cargando... Por favor espere"
+          class="elevation-1"
+        >
+          <!-- START Slot Top -->
+          <template slot="top">
+            <v-toolbar flat>
+              <v-toolbar-title
+                >{{ countLocations }} Ubicaciones</v-toolbar-title
+              >
+              <v-spacer></v-spacer>
+
+              <!-- START Dialog Form -->
+              <v-dialog v-model="dialog" persistent max-width="500px">
+                <template v-slot:activator="{ on, attrs }">
                   <v-btn
-                    @click="selectLocation(location.locationId)"
-                    fab
-                    x-small
-                    color="info"
-                    ><v-icon>mdi-pencil</v-icon></v-btn
+                    color="indigo"
+                    dark
+                    class="mb-2"
+                    v-bind="attrs"
+                    v-on="on"
                   >
-                  <v-btn
-                    @click.stop="dialogEliminar = true"
-                    @click="idEliminar = location.locationId"
-                    fab
-                    x-small
-                    color="error"
-                    ><v-icon>mdi-delete</v-icon></v-btn
-                  >
-                </td>
-              </tr>
-            </tbody>
+                    Nuevo
+                  </v-btn>
+                </template>
+                <v-card>
+                  <v-card-title>
+                    <span class="text-h5">{{ formTitle }}</span>
+                  </v-card-title>
+
+                  <!-- START Form -->
+                  <v-card-text>
+                    <v-container>
+                      <v-row>
+                        <v-col cols="12" sm="6" md="4">
+                          <v-text-field
+                            label="Nombre"
+                            required
+                            v-model="editedItem.locationName"
+                          ></v-text-field>
+                        </v-col>
+                      </v-row>
+                    </v-container>
+                    <small>*Indica campos requeridos</small>
+                  </v-card-text>
+                  <!-- END Form -->
+
+                  <!-- START Form Buttons -->
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="blue darken-1" text @click="close">
+                      Cerrar
+                    </v-btn>
+                    <v-btn color="blue darken-1" text @click="save">
+                      Guardar
+                    </v-btn>
+                  </v-card-actions>
+                  <!-- END Form Buttons -->
+                </v-card>
+              </v-dialog>
+              <!-- END Dialog Form -->
+
+              <!-- START Delete Dialog Form -->
+              <v-dialog v-model="dialogDelete" max-width="500px">
+                <v-card>
+                  <v-card-title class="text-h5">
+                    <v-spacer></v-spacer>
+                    ¿Desea eliminar esta ubicación?
+                    <v-spacer></v-spacer>
+                  </v-card-title>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                      x-large
+                      color="blue darken-1"
+                      text
+                      @click="closeDelete"
+                      >Cancelar</v-btn
+                    >
+                    <v-btn color="red darken-1" text @click="deleteItemConfirm"
+                      >Eliminar</v-btn
+                    >
+                    <v-spacer></v-spacer>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+              <!-- END Delete Dialog Form -->
+            </v-toolbar>
           </template>
-        </v-simple-table>
+          <!-- END Slot Top -->
+
+          <!-- START Edit Cells -->
+          // eslint-disable-next-line
+          <template v-slot:item.updatedAt="{ item }">
+            {{ convertTime(item.updatedAt) }}
+          </template>
+
+          // eslint-disable-next-line
+          <template v-slot:item.actions="{ item }">
+            <v-icon small class="mr-2" @click="editItem(item)">
+              mdi-pencil
+            </v-icon>
+            <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
+          </template>
+          <!-- END Edit Cells -->
+        </v-data-table>
+        <!-- END Data Table -->
       </v-col>
     </v-row>
-    <!-- ventana de diálogo para eliminar registros -->
-    <v-dialog v-model="dialogEliminar" max-width="350">
-      <v-card>
-        <v-card-title class="headline"
-          >¿Desea eliminar el registro?</v-card-title
-        >
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn @click="dialogEliminar = false">Cancelar</v-btn>
-          <v-btn @click="deleteLocation(idEliminar)" color="error"
-            >Aceptar</v-btn
-          >
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-    <!-- componente snackbar para mostrar mensaje de eliminación -->
-    <v-snackbar v-model="snackbar" color="success">
-      {{ textsnack }}
-      <template v-slot:action="{ attrs }">
-        <v-btn text v-bind="attrs" @click="snackbar = false">Cerrar</v-btn>
-      </template>
-    </v-snackbar>
   </v-container>
 </template>
+
 <script>
-import Axios from "axios";
 import { DateTime } from "luxon";
+
+import { createNamespacedHelpers } from "vuex";
+const { mapState, mapActions } = createNamespacedHelpers("locations");
 
 export default {
   name: "ViewLocations",
   data() {
     return {
       dialog: false,
-      dialogEliminar: false,
-      accionModal: "Nuevo",
-      idEliminar: 0,
-      locations: [],
-      locationData: {
+      dialogDelete: false,
+      editedIndex: -1,
+      editedItem: {
+        locationId: 0,
         locationName: "",
-        locationId: 0
       },
-      snackbar: false,
-      textsnack: ""
+      defaultItem: {
+        locationId: 0,
+        locationName: "",
+      },
+      headers: [
+        {
+          text: "ID",
+          align: "start",
+          sortable: true,
+          value: "locationId",
+        },
+        {
+          text: "Ubicación",
+          align: "start",
+          sortable: true,
+          value: "locationName",
+        },
+        {
+          text: "Ult. Actualización",
+          align: "start",
+          sortable: true,
+          value: "updatedAt",
+        },
+        {
+          text: "Acciones",
+          align: "start",
+          sortable: false,
+          value: "actions",
+        },
+      ],
     };
   },
-  methods: {
-    selectLocation: function(id) {
-      const location = this.locations.find(
-        location => location.locationId == id
-      );
-      this.locationData.locationId = location.locationId;
-      this.locationData.locationName = location.locationName;
-      this.showModal("Editar");
+  computed: {
+    ...mapState({
+      locations: (state) => state.locations,
+    }),
+    countLocations() {
+      return this.$store.getters["locations/count"];
     },
-    showModal: function(action) {
-      this.accionModal = action;
+    formTitle() {
+      return this.editedIndex === -1 ? "Nueva ubicación" : "Editar ubicación";
+    },
+  },
+  watch: {
+    dialog(val) {
+      val || this.close();
+    },
+    dialogDelete(val) {
+      val || this.closeDelete();
+    },
+  },
+  created() {
+    this.initialize();
+  },
+  methods: {
+    initialize() {
+      // Init the data
+      this.getLocations();
+    },
+    editItem(item) {
+      // Action Edit
+      this.editedIndex = item.locationId;
+      console.log(this.editedIndex);
+      this.editedItem = Object.assign({}, item);
       this.dialog = true;
     },
-    dismissModal: function() {
-      this.dialog = false;
-      this.resetData();
+    deleteItem(item) {
+      this.editedIndex = item.locationId;
+      console.log(this.editedIndex);
+      this.editedItem = Object.assign({}, item);
+      this.dialogDelete = true;
     },
-    getLocations: async function() {
-      const response = await Axios.get(this.$API_URI + "locations");
-      console.log(response.data);
-
-      this.locations = response.data;
+    deleteItemConfirm() {
+      // Action delete
+      this.$store.dispatch("locations/deleteLocation", this.editedItem);
+      this.closeDelete();
     },
-    editOrCreateLocation: function() {
-      if (this.accionModal === "Nuevo") {
-        this.saveLocation();
+    save() {
+      console.log(this.editedIndex);
+      if (this.editedIndex > -1) {
+        // Action Edit
+        this.$store.dispatch("locations/editLocation", this.editedItem);
       } else {
-        this.editLocation();
+        // Action save
+        this.$store.dispatch("locations/saveLocation", this.editedItem);
       }
+      this.close();
     },
-    saveLocation: async function() {
-      try {
-        const response = await Axios.post(this.$API_URI + "locations", {
-          locationName: this.locationData.locationName
-        });
-        console.log(response);
-        if (response.status === 200) {
-          this.dialog = false;
-          this.resetData();
-        }
-      } catch (err) {
-        console.error(err);
-      }
-      this.getLocations();
+    close() {
+      this.dialog = false;
+      this.$nextTick(() => {
+        this.editedItem = Object.assign({}, this.defaultItem);
+        this.editedIndex = -1;
+      });
     },
-    editLocation: async function() {
-      const id = this.locationData.locationId;
-      try {
-        const response = await Axios.put(`${this.$API_URI}locations/${id}`, {
-          locationName: this.locationData.locationName
-        });
-        console.log(response);
-        if (response.status === 200) {
-          this.dialog = false;
-          this.resetData();
-        }
-      } catch (err) {
-        console.error(err);
-      }
-      this.getLocations();
+    closeDelete() {
+      this.dialogDelete = false;
+      this.$nextTick(() => {
+        this.editedItem = Object.assign({}, this.defaultItem);
+        this.editedIndex = -1;
+      });
     },
-    deleteLocation: async function(id) {
-      const response = await Axios.delete(`${this.$API_URI}locations/${id}`);
-      console.log(response);
-
-      if (response.status === 200) {
-        this.resetData();
-        this.dialogEliminar = false;
-        this.getLocations();
-      }
-    },
-    convertTime: function(isoDateTime) {
+    convertTime(isoDateTime) {
       const locationDate = DateTime.fromISO(isoDateTime);
       return locationDate.toRelative(DateTime.now());
     },
-    resetData: function() {
-      this.locationData.locationId = 0;
-      this.locationData.locationName = "";
-    }
+    ...mapActions(["getLocations"]),
   },
-  mounted() {
-    this.getLocations();
-  }
 };
 </script>
