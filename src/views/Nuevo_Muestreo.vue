@@ -2,9 +2,7 @@
   <v-stepper v-model="e6" vertical>
     <v-row class="text-center">
       <v-col class="mb-4">
-        <h2 class="display-2 font-weight-bold mb-3">
-          Nuevo Muestreo
-        </h2>
+        <h2 class="display-2 font-weight-bold mb-3">Nuevo Muestreo</h2>
       </v-col>
     </v-row>
     <v-stepper-step :complete="e6 > 1" step="1">
@@ -28,12 +26,8 @@
         type="number"
         requerided
       ></v-text-field>
-      <v-btn color="primary" @click="e6 = 2">
-        Continue
-      </v-btn>
-      <v-btn color="secondary">
-        Cancel
-      </v-btn>
+      <v-btn color="primary" @click="e6 = 2"> Continue </v-btn>
+      <v-btn color="secondary"> Cancel </v-btn>
     </v-stepper-content>
 
     <v-stepper-step :complete="e6 > 2" step="2">
@@ -73,12 +67,8 @@
         type="string"
         required
       ></v-text-field>
-      <v-btn color="primary" @click="e6 = 3">
-        Continue
-      </v-btn>
-      <v-btn color="secondary">
-        Cancel
-      </v-btn>
+      <v-btn color="primary" @click="e6 = 3"> Continue </v-btn>
+      <v-btn color="secondary"> Cancel </v-btn>
     </v-stepper-content>
 
     <v-stepper-step :complete="e6 > 3" step="3">
@@ -103,12 +93,8 @@
         required
       ></v-text-field>
 
-      <v-btn color="primary" @click="e6 = 4">
-        Continue
-      </v-btn>
-      <v-btn color="secondary">
-        Cancel
-      </v-btn>
+      <v-btn color="primary" @click="e6 = 4"> Continue </v-btn>
+      <v-btn color="secondary"> Cancel </v-btn>
     </v-stepper-content>
 
     <v-stepper-step :complete="e6 > 4" step="4">
@@ -128,16 +114,10 @@
         required
       ></v-text-field>
 
-      <v-btn color="primary" @click="e6 = 5">
-        Continue
-      </v-btn>
-      <v-btn color="secondary">
-        Cancel
-      </v-btn>
+      <v-btn color="primary" @click="e6 = 5"> Continue </v-btn>
+      <v-btn color="secondary"> Cancel </v-btn>
     </v-stepper-content>
-    <v-stepper-step step="5">
-      Listado de Muestreos
-    </v-stepper-step>
+    <v-stepper-step step="5"> Listado de Muestreos </v-stepper-step>
     <v-stepper-content step="5">
       <v-row class="text-center">
         <v-col cols="12">
@@ -161,7 +141,7 @@
                     <v-btn
                       :to="{
                         name: 'EditarCultivo',
-                        params: { id: articulo.id }
+                        params: { id: articulo.id },
                       }"
                       fab
                       small
@@ -204,17 +184,11 @@
         </template>
       </v-snackbar>
 
-      <v-btn color="primary" @click="e6 = 1">
-        Continue
-      </v-btn>
+      <v-btn color="primary" @click="e6 = 1"> Continue </v-btn>
 
-      <v-btn color="error">
-        Guardar
-      </v-btn>
+      <v-btn color="error"> Guardar </v-btn>
 
-      <v-btn color="secondary">
-        Cancel
-      </v-btn>
+      <v-btn color="secondary"> Cancel </v-btn>
     </v-stepper-content>
   </v-stepper>
 </template>
@@ -230,18 +204,18 @@ export default {
       articulos: null,
       id: null,
       snackbar: false,
-      textsnack: "¡Registro Eliminado!"
+      textsnack: "¡Registro Eliminado!",
     };
   },
   methods: {
     obtenerArticulos() {
       axios
         .get("http://127.0.0.1/apirest/articulos.php")
-        .then(r => {
+        .then((r) => {
           this.articulos = r.data;
           console.log(this.articulos);
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error);
         });
     },
@@ -253,10 +227,10 @@ export default {
           this.dialog = false;
           this.snackbar = true;
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error);
         });
-    }
-  }
+    },
+  },
 };
 </script>

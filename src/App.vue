@@ -1,21 +1,17 @@
 <template>
   <v-app>
     <!-- START Navigation Drawer -->
-    <v-navigation-drawer
-      class="deep-purple accent-4"
-      v-model="drawer"
-      dark
-      absolute
-      temporary
-      app
-      clipped
-    >
+    <v-navigation-drawer class="deep-purple accent-4" v-model="drawer" dark app>
       <!-- START Navigation Drawer Title -->
       <v-list-item>
         <v-list-item-content>
-          <v-list-item-title class="text-h5">
-            AGROTICS
-          </v-list-item-title>
+          <v-img
+            alt="Agrook brand"
+            class="shrink mr-2"
+            contain
+            :src="require('./assets/logotipo-white.png')"
+            transition="scale-transition"
+          />
           <v-list-item-subtitle> UTPL </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
@@ -51,44 +47,59 @@
 
       <template v-slot:append>
         <div class="pa-2">
-          <v-btn block>
-            Cerrar sesión
-          </v-btn>
+          <v-btn block> Cerrar sesión </v-btn>
         </div>
       </template>
       <!-- END Navigation Drawer Menu -->
     </v-navigation-drawer>
     <!-- END Navigation Drawer -->
 
-    <v-card class="mx-auto overflow-hidden" height="100%" width="100%">
-      <v-app-bar color="primary">
-        <v-app-bar-nav-icon
-          @click="drawer = true"
-          class="white--text"
-        ></v-app-bar-nav-icon>
-        <v-toolbar-title class="white--text"> AGROTICS </v-toolbar-title>
-      </v-app-bar>
-      <v-main>
-        <v-container fluid>
-          <v-fade-transition mode="out-in">
-            <router-view></router-view>
-          </v-fade-transition>
-        </v-container>
-      </v-main>
-    </v-card>
+    <!-- START App Bar -->
+    <v-app-bar app color="primary" dark>
+      <v-app-bar-nav-icon @click="drawer = true" class="white--text">
+      </v-app-bar-nav-icon>
+      <div class="d-flex align-center">
+        <v-img
+          alt="Agrook Logo"
+          class="shrink mr-2"
+          contain
+          :src="require('./assets/logo.png')"
+          transition="scale-transition"
+          width="40"
+        />
+      </div>
+      <v-toolbar-title class="white--text"> AGROOK </v-toolbar-title>
+
+      <v-spacer></v-spacer>
+
+      <v-btn href="/" text>
+        <span class="mr-2">Inicio</span>
+      </v-btn>
+    </v-app-bar>
+    <!-- END App Bar -->
+
+    <v-main>
+      <v-container fluid>
+        <v-fade-transition mode="out-in">
+          <router-view />
+        </v-fade-transition>
+      </v-container>
+    </v-main>
   </v-app>
 </template>
+
 <script>
 export default {
   name: "App",
+
   data: () => ({
-    drawer: false,
+    drawer: null,
     icons: ["home", "shopping", "email"],
     routes: [
       {
         title: "Dashboard",
         icon: "mdi-view-dashboard",
-        subroutes: [{ title: "Dashboard", path: "/" }]
+        subroutes: [{ title: "Dashboard", path: "/" }],
       },
       {
         title: "Índices",
@@ -96,21 +107,21 @@ export default {
         subroutes: [
           {
             title: "Ubicaciones",
-            path: "/locations"
+            path: "/locations",
           },
           {
             title: "Tipo de parcela",
-            path: "/placeTypes"
+            path: "/placeTypes",
           },
           {
             title: "Lugares de plantación",
-            path: "/plantationPlaces"
+            path: "/plantingPlaces",
           },
           {
             title: "Cultivos",
-            path: "/crops"
-          }
-        ]
+            path: "/crops",
+          },
+        ],
       },
 
       {
@@ -119,23 +130,23 @@ export default {
         subroutes: [
           {
             title: "Áreas cultivos",
-            path: "/plantedAreas"
+            path: "/plantedAreas",
           },
           {
             title: "Muestreos",
-            path: "/samplings"
-          }
-        ]
+            path: "/samplings",
+          },
+        ],
       },
       {
         title: "Otros",
         icon: "mdi-open-in-new",
         subroutes: [
           { title: "Account", path: "/me", icon: "mdi-account-box" },
-          { title: "Admin", path: "/admin", icon: "mdi-gavel" }
-        ]
-      }
-    ]
-  })
+          { title: "Admin", path: "/admin", icon: "mdi-gavel" },
+        ],
+      },
+    ],
+  }),
 };
 </script>

@@ -1,30 +1,24 @@
 <template>
-  <v-card class="mx-auto" max-width="344" outlined>
-    <v-list-item three-line>
-      <v-list-item-content>
-        <div class="text-overline mb-4">AGROTIC</div>
-        <v-list-item-title class="text-h5 mb-1">
-          {{ nomInvernadero }}
-        </v-list-item-title>
-        <v-list-item-subtitle
-          >Area: {{ areaInvernadero }}m2
-        </v-list-item-subtitle>
-      </v-list-item-content>
+  <v-card class="mx-auto" max-width="374" min-height="200">
+    <v-img height="200" :src="require('../assets/invernadero.png')"></v-img>
 
-      <v-list-item-avatar tile size="80" color="green lighten-3"
-        ><v-icon large color="green darkend-2"
-          >mdi-domain</v-icon
-        ></v-list-item-avatar
-      >
-    </v-list-item>
+    <v-card-title>{{ nomInvernadero }}</v-card-title>
 
-    <v-progress-linear
-      v-model="areaOcupadaNew"
-      height="25"
-      :color="colorPorcentaje(areaOcupada)"
-    >
-      <strong>{{ Math.ceil(areaOcupada) }}%</strong>
-    </v-progress-linear>
+    <v-card-text>
+      <v-row align="center" class="mx-0">
+        <v-progress-linear
+          :value="areaOcupada"
+          height="25"
+          :color="colorPorcentaje(areaOcupada)"
+          rounded
+        >
+          <strong>{{ Math.ceil(areaOcupada) }}%</strong>
+        </v-progress-linear>
+      </v-row>
+      <div class="mt-4 text-subtitle-1">Area: {{ areaInvernadero }}m2</div>
+    </v-card-text>
+
+    <v-divider class="mx-4"></v-divider>
 
     <v-card-actions>
       <v-btn
@@ -38,22 +32,30 @@
     </v-card-actions>
   </v-card>
 </template>
+
 <script>
 export default {
   name: "CardInvernadero",
   props: {
-    idInvernadero: Number,
-    nomInvernadero: String,
-    areaInvernadero: Number,
-    areaOcupada: Number
-  },
-  data() {
-    return {
-      areaOcupadaNew: this.areaOcupada
-    };
+    idInvernadero: {
+      type: Number,
+      required: true,
+    },
+    nomInvernadero: {
+      type: String,
+      required: true,
+    },
+    areaInvernadero: {
+      type: Number,
+      required: true,
+    },
+    areaOcupada: {
+      type: Number,
+      required: true,
+    },
   },
   methods: {
-    colorPorcentaje: function(porcentaje) {
+    colorPorcentaje: (porcentaje) => {
       let color = "green darkend-1";
       if (porcentaje >= 80) {
         color = "red darkend-1";
@@ -61,7 +63,7 @@ export default {
         color = "amber darkend-1";
       }
       return color;
-    }
-  }
+    },
+  },
 };
 </script>
