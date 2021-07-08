@@ -11,30 +11,20 @@
             max-height="150"
           />
         </v-col>
-        <v-col class="mb-4 px-6">
-          <v-card-subtitle
-            class="black--text text-black font-weight-medium text-h4"
-          >
-            Agro tics es un proyecto orientado al control y registro de las
-            especies existentes en los invernaderos de UTPL
-          </v-card-subtitle>
-        </v-col>
       </v-row>
     </v-container>
     <!-- </v-parallax> -->
     <v-row class="mt-2">
       <v-col
-        v-for="(inv, index) in invernaderos"
-        :key="index"
+        v-for="inv in plantingPlaces"
+        :key="inv.plantingPlaceId"
         :sm="12"
         :md="6"
         :lg="4"
       >
         <card-invernadero
-          :idInvernadero="inv.id"
-          :areaInvernadero="inv.area"
-          :areaOcupada="inv.porcentaje"
-          :nomInvernadero="inv.name"
+          :plantingPlace="inv"
+          :areaOcupada="percentOcuped(inv)"
         ></card-invernadero>
       </v-col>
     </v-row>
@@ -51,32 +41,49 @@ export default {
     CardInvernadero,
   },
   data: () => ({
-    invernaderos: [
-      {
-        id: 1,
-        name: "Invernadero 1",
-        area: 800,
-        porcentaje: 20,
+    invernadero: {
+      plantingPlaceId: 1,
+      placeName: "invernadero 1",
+      availableArea: 375,
+      status: "empty",
+      createdAt: "2021-07-08T07:48:12.000Z",
+      updatedAt: "2021-07-08T07:48:12.000Z",
+      location: {
+        locationId: 1,
+        locationName: "utpl",
       },
-      {
-        id: 2,
-        name: "Invernadero 2",
-        area: 500,
-        porcentaje: 80,
-      },
-      {
-        id: 3,
-        name: "Invernadero 3",
-        area: 700,
-        porcentaje: 50,
-      },
-      {
-        id: 4,
-        name: "Parcela 1",
-        area: 200,
-        porcentaje: 30,
-      },
-    ],
+    },
   }),
+  computed: {
+    plantingPlaces() {
+      return this.$store.state.plantingPlaces.plantingPlaces;
+    },
+  },
+  created() {
+    this.initialize();
+  },
+  methods: {
+    initialize() {
+      this.getPlantingPlaces();
+    },
+    getPlantingPlaces() {
+      return this.$store.dispatch(
+        "plantingPlaces/getPlantingPlacesWithPlantedAreas"
+      );
+    },
+    percentOcuped(plantingPlace) {
+      if (!plantingPlace) return 0;
+
+      const { availableArea, plantedAreas } = plantingPlace;
+
+      if (!plantedAreas || plantedAreas.length === 0) return 0;
+
+      const areaOcuped = plantedAreas.reduce(
+        (prev, current) => prev + current.plantedArea
+      );
+
+      return (100 * areaOcuped) / availableArea;
+    },
+  },
 };
 </script>

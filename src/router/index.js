@@ -8,6 +8,8 @@ import ViewPlaceTypes from "../views/ViewPlaceTypes.vue";
 import ViewPlantingPlaces from "../views/ViewPlantingPlaces.vue";
 import ViewPlantedAreas from "../views/ViewPlantedAreas.vue";
 
+import ViewNewSampling from "../views/ViewNewSampling.vue";
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -50,6 +52,12 @@ const routes = [
     path: "/areas",
     name: "Areas",
     component: ViewAreas,
+  },
+  {
+    path: "/new-sampling/:plantedAreaId",
+    name: "NewSampling",
+    component: ViewNewSampling,
+    props: true,
   },
   {
     path: "/about",
