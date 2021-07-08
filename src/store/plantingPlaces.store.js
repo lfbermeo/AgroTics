@@ -32,6 +32,17 @@ export default {
         console.log(err);
       }
     },
+    async getPlantingPlacesWithPlantedAreas({ state, commit, rootState }) {
+      try {
+        const res = await Axios.get(
+          `${rootState.API_URI}${state.EP_PLANTING_PLACES}/with/plantedAreas`
+        );
+        console.log(res.data);
+        commit("SET_PLANTING_PLACES", res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    },
     async savePlantingPlace({ state, dispatch, rootState }, plantingPlace) {
       const { placeName, availableArea, location, placeType } = plantingPlace;
       const { locationId } = location;
