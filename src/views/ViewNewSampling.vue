@@ -38,9 +38,10 @@
           required
         ></v-text-field>
         <v-text-field
-          v-model="samplingData.plantedAreaId"
+          v-model="plantedArea.plantedArea"
           label="Area Plantada m2"
           type="number"
+          readonly
           requerided
         ></v-text-field>
         <!-- <v-btn color="primary" @click="stepNumber = 2">Siguiente</v-btn> -->
@@ -311,6 +312,8 @@
 </template>
 
 <script>
+import { formatDate } from "../libs/time.utils";
+
 export default {
   name: "newSampling",
   props: ["plantedAreaId"],
@@ -322,7 +325,7 @@ export default {
       textsnack: "Faltan completar datos.",
 
       samplingData: {
-        samplingDate: "",
+        samplingDate: formatDate(new Date()),
         observations: "",
         plantedAreaId: undefined,
       },
@@ -342,7 +345,7 @@ export default {
       plagueData: {
         plagueProduct: "",
         amount: "",
-        applicationDate: "",
+        applicationDate: formatDate(new Date()),
       },
 
       samplingDataCorrect: false,
@@ -412,6 +415,7 @@ export default {
   methods: {
     initializate() {
       this.loadPlantedArea();
+      this.samplingData.plantedAreaId = this.plantedArea.plantedAreaId;
     },
     confirmarBorrado() {
       this.dialog = false;
