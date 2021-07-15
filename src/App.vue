@@ -45,11 +45,11 @@
         </v-list-group>
       </v-list>
 
-      <template v-slot:append>
+      <!-- <template v-slot:append>
         <div class="pa-2">
           <v-btn block> Cerrar sesión </v-btn>
         </div>
-      </template>
+      </template> -->
       <!-- END Navigation Drawer Menu -->
     </v-navigation-drawer>
     <!-- END Navigation Drawer -->
@@ -70,11 +70,11 @@
       </div>
       <v-toolbar-title class="white--text"> AGROOK </v-toolbar-title>
 
-      <v-spacer></v-spacer>
+      <!-- <v-spacer></v-spacer>
 
       <v-btn href="/" text>
         <span class="mr-2">Inicio</span>
-      </v-btn>
+      </v-btn> -->
     </v-app-bar>
     <!-- END App Bar -->
 
@@ -138,14 +138,14 @@ export default {
           },
         ],
       },
-      {
-        title: "Otros",
-        icon: "mdi-open-in-new",
-        subroutes: [
-          { title: "Account", path: "/me", icon: "mdi-account-box" },
-          { title: "Admin", path: "/admin", icon: "mdi-gavel" },
-        ],
-      },
+      // {
+      //   title: "Otros",
+      //   icon: "mdi-open-in-new",
+      //   subroutes: [
+      //     { title: "Account", path: "/me", icon: "mdi-account-box" },
+      //     { title: "Admin", path: "/admin", icon: "mdi-gavel" },
+      //   ],
+      // },
     ],
   }),
 };
